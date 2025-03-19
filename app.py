@@ -58,10 +58,14 @@ if st.button("Predict No-shows"):
                 filtered_df[col] = le.transform(filtered_df[col])
 
         X_input = filtered_df.drop(columns=['APPT_DATE'])
+
+        # Align features to model’s expected order
+        expected_cols = model.feature_names_in_
+        X_input = X_input[expected_cols]
+
         probabilities = model.predict_proba(X_input)[:, 1]
         predictions = (probabilities > 0.5).astype(int)
 
-        # Format results for output
         filtered_df['No Show'] = predictions
         filtered_df['Prob'] = probabilities.round(4)
         filtered_df['Date'] = filtered_df['APPT_DATE'].dt.date
