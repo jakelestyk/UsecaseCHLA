@@ -1,4 +1,6 @@
 import streamlit as st
+st.set_page_config(page_title="CHLA No-show Predictor", layout="centered")  # ✅ MUST BE FIRST Streamlit call
+
 import pandas as pd
 import pickle
 from datetime import datetime
@@ -27,7 +29,6 @@ def load_data():
 df_2024 = load_data()
 
 # Streamlit UI
-st.set_page_config(page_title="CHLA No-show Predictor", layout="centered")
 st.title("CHLA No-show Predictor")
 st.markdown("Filter appointments below and generate no-show predictions for selected clinic and date range.")
 
